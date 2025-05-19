@@ -1,0 +1,62 @@
+{
+  "extends": [
+    "next/core-web-vitals",
+    "airbnb",
+    "airbnb/hooks",
+    "plugin:react/recommended",
+    "plugin:react-hooks/recommended",
+    "plugin:jsx-a11y/recommended",
+    "plugin:prettier/recommended"
+  ],
+  "plugins": [
+    "react",
+    "react-hooks",
+    "jsx-a11y",
+    "testing-library"
+  ],
+  "rules": {
+    "react/react-in-jsx-scope": "off",
+    "react/jsx-filename-extension": ["error", { "extensions": [".jsx", ".js", ".tsx", ".ts"] }],
+    "react/jsx-props-no-spreading": "off",
+    "react/require-default-props": "off",
+    "jsx-a11y/anchor-is-valid": "off",
+    "import/extensions": "off",
+    "import/no-unresolved": "off",
+    
+    "react/function-component-definition": ["error", {
+      "namedComponents": "arrow-function",
+      "unnamedComponents": "arrow-function"
+    }],
+    
+    "react-hooks/rules-of-hooks": "error",
+    "react-hooks/exhaustive-deps": "warn"
+  },
+  "settings": {
+    "react": {
+      "version": "detect"
+    },
+    "import/resolver": {
+      "node": {
+        "extensions": [".js", ".jsx", ".ts", ".tsx"]
+      }
+    }
+  },
+  "overrides": [
+    {
+      "files": [
+        "**/*.test.js",
+        "**/*.test.jsx",
+        "**/*.spec.js",
+        "**/*.spec.jsx"
+      ],
+      "env": {
+        "jest": true
+      },
+      "extends": ["plugin:testing-library/react"],
+      "rules": {
+        "import/no-extraneous-dependencies": "off",
+        "react/prop-types": "off"
+      }
+    }
+  ]
+}

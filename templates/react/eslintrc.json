@@ -1,0 +1,76 @@
+{
+  "extends": [
+    "airbnb",
+    "airbnb/hooks",
+    "plugin:react/recommended",
+    "plugin:react-hooks/recommended",
+    "plugin:jsx-a11y/recommended",
+    "plugin:jest/recommended",
+    "plugin:testing-library/react",
+    "plugin:prettier/recommended"
+  ],
+  "plugins": [
+    "react",
+    "react-hooks",
+    "jsx-a11y",
+    "testing-library"
+  ],
+  "parserOptions": {
+    "ecmaFeatures": {
+      "jsx": true
+    }
+  },
+  "rules": {
+    "react/prop-types": "error",
+    "react/jsx-filename-extension": ["error", { "extensions": [".jsx", ".js"] }],
+    "react/jsx-props-no-spreading": "off",
+    "react/react-in-jsx-scope": "off",
+    "react/function-component-definition": ["error", {
+      "namedComponents": "arrow-function",
+      "unnamedComponents": "arrow-function"
+    }],
+    "react/require-default-props": "off",
+    
+    "react-hooks/rules-of-hooks": "error",
+    "react-hooks/exhaustive-deps": "warn",
+    
+    "jsx-a11y/anchor-is-valid": ["error", {
+      "components": ["Link"],
+      "specialLink": ["to"],
+      "aspects": ["invalidHref", "preferButton"]
+    }],
+    
+    "import/extensions": ["error", "ignorePackages", {
+      "js": "never",
+      "jsx": "never"
+    }]
+  },
+  "settings": {
+    "react": {
+      "version": "detect"
+    },
+    "import/resolver": {
+      "node": {
+        "extensions": [".js", ".jsx", ".json"]
+      }
+    }
+  },
+  "overrides": [
+    {
+      "files": [
+        "**/*.test.js",
+        "**/*.test.jsx",
+        "**/*.spec.js",
+        "**/*.spec.jsx"
+      ],
+      "env": {
+        "jest": true
+      },
+      "extends": ["plugin:testing-library/react"],
+      "rules": {
+        "import/no-extraneous-dependencies": "off",
+        "react/prop-types": "off"
+      }
+    }
+  ]
+}

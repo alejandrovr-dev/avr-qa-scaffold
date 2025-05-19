@@ -1,0 +1,21 @@
+{
+  "name": "node-sample-project",
+  "version": "1.0.0",
+  "description": "Sample Node.js project for testing",
+  "type": "module",
+  "main": "src/index.js",
+  "scripts": {
+    "start": "node lib/index.js",
+    "dev": "node --watch lib/index.js"
+  },
+  "engines": {
+    "node": ">=20.0.0"
+  },
+  "keywords": [
+    "node",
+    "sample",
+    "test"
+  ],
+  "author": "Alejandro Valencia",
+  "license": "MIT"
+}

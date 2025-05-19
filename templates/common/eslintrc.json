@@ -1,0 +1,100 @@
+{
+  "env": {
+    "node": true,
+    "es2021": true,
+    "jest": true
+  },
+  "extends": [
+    "airbnb-base",
+    "plugin:jest/recommended",
+    "plugin:promise/recommended",
+    "plugin:prettier/recommended"
+  ],
+  "plugins": [
+    "import",
+    "jest",
+    "promise",
+    "prettier"
+  ],
+  "parserOptions": {
+    "ecmaVersion": "latest",
+    "sourceType": "module"
+  },
+  "rules": {
+    "no-console": ["warn", { "allow": ["warn", "error", "info"] }],
+    "no-underscore-dangle": "off",
+    "no-param-reassign": [
+      "error",
+      {
+        "props": true,
+        "ignorePropertyModificationsFor": ["req", "res", "ctx", "acc"]
+      }
+    ],
+
+    "import/extensions": [
+      "error",
+      "ignorePackages",
+      {
+        "js": "always"
+      }
+    ],
+    "import/prefer-default-export": "off",
+    "import/order": [
+      "error",
+      {
+        "groups": ["builtin", "external", "internal", "parent", "sibling", "index"],
+        "newlines-between": "always",
+        "alphabetize": { "order": "asc", "caseInsensitive": true }
+      }
+    ],
+
+    "consistent-return": "off",
+    "no-unused-vars": [
+      "error",
+      {
+        "argsIgnorePattern": "^_",
+        "varsIgnorePattern": "^_"
+      }
+    ],
+
+    "promise/always-return": "error",
+    "promise/no-return-wrap": "error",
+    "promise/param-names": "error",
+    "promise/catch-or-return": "error",
+    "promise/no-promise-in-callback": "warn",
+    "promise/no-callback-in-promise": "warn",
+    "promise/no-nesting": "warn",
+
+    "prettier/prettier": "error"
+  },
+  "overrides": [
+    {
+      "files": ["**/*.test.js", "**/*.spec.js"],
+      "rules": {
+        "import/no-extraneous-dependencies": ["error", { "devDependencies": true }]
+      }
+    },
+    {
+      "files": ["scripts/**/*.js"],
+      "rules": {
+        "import/no-extraneous-dependencies": ["error", { "devDependencies": true }],
+        "no-console": "off"
+      }
+    },
+    {
+      "files": ["**/config/**/*.js", "**/*.config.js"],
+      "rules": {
+        "import/no-extraneous-dependencies": ["error", { "devDependencies": true }]
+      }
+    }
+  ],
+  "settings": {
+    "import/resolver": {
+      "node": {
+        "extensions": [".js", ".json"]
+      }
+    },
+    "import/extensions": [".js"],
+    "import/core-modules": []
+  }
+}
