@@ -1,5 +1,5 @@
 /**
- * @module src/ports/__tests__/loggerPort.test.js
+ * @module src/ports/output/__tests__/loggerPort.test.js
  * @version 1.0.0
  * @author Alejandro Valencia <dev@alejandrovr.com>
  * @description

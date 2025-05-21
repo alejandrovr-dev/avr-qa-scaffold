@@ -1,5 +1,5 @@
 /**
- * @module src/ports/packageManagerPort.js
+ * @module src/ports/output/packageManagerPort.js
  * @version 0.1.0
  * @author Alejandro Valencia <dev@alejandrovr.com>
  * @description

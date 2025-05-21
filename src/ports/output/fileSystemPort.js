@@ -1,5 +1,5 @@
 /**
- * @module src/ports/fileSystemPort.js
+ * @module src/ports/output/fileSystemPort.js
  * @version 0.1.0
  * @author Alejandro Valencia <dev@alejandrovr.com>
  * @description

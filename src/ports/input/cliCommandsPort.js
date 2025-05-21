@@ -1,5 +1,5 @@
 /**
- * @module src/ports/cliCommandsPort.js
+ * @module src/ports/input/cliCommandsPort.js
  * @version 0.1.0
  * @author Alejandro Valencia <dev@alejandrovr.com>
  * @description

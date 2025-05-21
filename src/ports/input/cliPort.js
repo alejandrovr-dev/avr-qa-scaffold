@@ -1,5 +1,5 @@
 /**
- * @module src/ports/cliPort.js
+ * @module src/ports/input/cliPort.js
  * @version 0.1.0
  * @author Alejandro Valencia <dev@alejandrovr.com>
  * @description

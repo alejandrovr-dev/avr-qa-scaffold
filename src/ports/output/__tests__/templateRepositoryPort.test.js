@@ -1,5 +1,5 @@
 /**
- * @module src/ports/__tests__/templateRepositoryPort.test.js
+ * @module src/ports/output/__tests__/templateRepositoryPort.test.js
  * @version 1.0.0
  * @author Alejandro Valencia <dev@alejandrovr.com>
  * @description
