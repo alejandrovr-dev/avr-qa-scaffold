@@ -20,6 +20,8 @@
  * @property {function(string): string} getAbsolutePath - Get absolute path from a relative path
  * @property {function(string): string} formatPath - Format a file path for display
  * @property {function(): string} getPackageRoot - Get the root directory of the package
+ * @property {function(string, string): Promise<void>} writeFile - Write content to a file
+ * @property {function(string, number): Promise<void>} chmod - Change file permissions
  */
 
 /**
@@ -35,7 +37,9 @@ export function isFileSystem(obj) {
     typeof obj.fileExists === 'function' &&
     typeof obj.getAbsolutePath === 'function' &&
     typeof obj.formatPath === 'function' &&
-    typeof obj.getPackageRoot === 'function'
+    typeof obj.getPackageRoot === 'function' &&
+    typeof obj.writeFile === 'function' &&
+    typeof obj.chmod === 'function'
   );
 }
 
@@ -50,5 +54,7 @@ export function createNullFileSystem() {
     getAbsolutePath: (path) => path,
     formatPath: (path) => path,
     getPackageRoot: () => '',
+    writeFile: async () => {},
+    chmod: async () => {},
   };
 }

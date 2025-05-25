@@ -22,6 +22,8 @@ import { isFileSystem } from '../../../../ports/output/fileSystemPort.js';
  */
 const mockFsMkdir = jest.fn();
 const mockFsAccess = jest.fn();
+const mockFsWriteFile = jest.fn();
+const mockFsChmod = jest.fn();
 /** 
  * And mock the fs module (substituting real module with our manual mocks)
  * This tells Jest: "whenever any module tries to import 'fs', return this mock object instead"
@@ -30,6 +32,8 @@ jest.unstable_mockModule('fs', () => ({
   promises: {
     mkdir: mockFsMkdir,
     access: mockFsAccess,
+    writeFile: mockFsWriteFile,
+    chmod: mockFsChmod,
   },
 }));
 /**
@@ -175,5 +179,73 @@ describe('NodeFS Adapter', () => {
     expect(path.isAbsolute(result)).toBe(true);
     // Verify it ends with a reasonable directory structure
     expect(result).toMatch(/avr-qa-scaffold$/);
+  });
+
+  test('writeFile should write content to file with UTF-8 encoding', async () => {
+    // Arrange
+    const fileSystem = createNodeFileSystem();
+    const filePath = 'test/file.txt';
+    const content = 'Hello World!';
+    fs.writeFile.mockResolvedValue(undefined);
+    // Act
+    await fileSystem.writeFile(filePath, content);
+    // Assert
+    expect(fs.writeFile).toHaveBeenCalledWith(filePath, content, 'utf8');
+  });
+
+  test('writeFile should throw error if write fails', async () => {
+    // Arrange
+    const fileSystem = createNodeFileSystem();
+    const filePath = 'test/file.txt';
+    const content = 'Hello World!';
+    const error = new Error('Write permission denied');
+    fs.writeFile.mockRejectedValue(error);
+    // Act & Assert
+    await expect(fileSystem.writeFile(filePath, content)).rejects.toThrow(error);
+    expect(fs.writeFile).toHaveBeenCalledWith(filePath, content, 'utf8');
+  });
+
+  test('chmod should change file permissions', async () => {
+    // Arrange
+    const fileSystem = createNodeFileSystem();
+    const filePath = 'test/script.sh';
+    const mode = 0o755;
+    fs.chmod.mockResolvedValue(undefined);
+    // Act
+    await fileSystem.chmod(filePath, mode);
+    // Assert
+    expect(fs.chmod).toHaveBeenCalledWith(filePath, mode);
+  });
+
+  test('chmod should throw error if chmod fails', async () => {
+    // Arrange
+    const fileSystem = createNodeFileSystem();
+    const filePath = 'test/script.sh';
+    const mode = 0o755;
+    const error = new Error('Permission denied');
+    fs.chmod.mockRejectedValue(error);
+    // Act & Assert
+    await expect(fileSystem.chmod(filePath, mode)).rejects.toThrow(error);
+    expect(fs.chmod).toHaveBeenCalledWith(filePath, mode);
+  });
+
+  test('chmod should handle different permission modes', async () => {
+    // Arrange
+    const fileSystem = createNodeFileSystem();
+    const filePath = 'test/file.txt';
+    fs.chmod.mockResolvedValue(undefined);
+    // Act
+    await fileSystem.chmod(filePath, 0o644);  // Read/write for owner, read for others
+    // Assert
+    expect(fs.chmod).toHaveBeenCalledWith(filePath, 0o644);
+  });
+
+  test('should create a filesystem that satisfies the FileSystemPort interface', () => {
+    // Arrange
+    const fileSystem = createNodeFileSystem();
+    // Act
+    const result = isFileSystem(fileSystem);
+    // Assert
+    expect(result).toBe(true);
   });
 });

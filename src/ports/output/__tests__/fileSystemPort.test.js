@@ -25,6 +25,8 @@ describe('FileSystemPort', () => {
         getAbsolutePath: jest.fn(),
         formatPath: jest.fn(),
         getPackageRoot: jest.fn(),
+        writeFile: jest.fn(),
+        chmod: jest.fn(),
       };
       // Act
       const result = isFileSystem(validFileSystem);
@@ -40,13 +42,16 @@ describe('FileSystemPort', () => {
         getAbsolutePath: jest.fn(),
         formatPath: jest.fn(),
         getPackageRoot: jest.fn(),
+        writeFile: jest.fn(),
+        chmod: jest.fn(),
       };
       const incompleteFS2 = {
         createDirIfNotExists: jest.fn(),
         fileExists: jest.fn(),
         getAbsolutePath: jest.fn(),
         formatPath: jest.fn(),
-        // Missing getPackageRoot
+        getPackageRoot: jest.fn(),
+        // Missing writeFile and chmod
       };
       // Act
       const result1 = isFileSystem(incompleteFS1);
@@ -64,6 +69,8 @@ describe('FileSystemPort', () => {
         getAbsolutePath: jest.fn(),
         formatPath: jest.fn(),
         getPackageRoot: jest.fn(),
+        writeFile: jest.fn(),
+        chmod: jest.fn(),
       };
       // Act
       const result = isFileSystem(invalidFS);
@@ -142,6 +149,20 @@ describe('FileSystemPort', () => {
       const result = nullFS.getPackageRoot();
       // Assert
       expect(result).toBe('');
+    });
+
+    test('writeFile should do nothing and not throw', async () => {
+      // Arrange
+      const nullFS = createNullFileSystem();
+      // Act & Assert
+      await expect(nullFS.writeFile('test/file.txt', 'content')).resolves.toBeUndefined();
+    });
+
+    test('chmod should do nothing and not throw', async () => {
+      // Arrange
+      const nullFS = createNullFileSystem();
+      // Act & Assert
+      await expect(nullFS.chmod('test/file.txt', 0o755)).resolves.toBeUndefined();
     });
   });
 });

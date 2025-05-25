@@ -92,6 +92,32 @@ export function createNodeFileSystem() {
       // src/adapters/output/fileSystem -> src/adapters/output -> src -> root
       return path.join(dirname(dirname(dirname(dirname(__dirname)))));
     },
+
+    /**
+     * Write content to a file
+     * @param {string} filePath - Path to write to
+     * @param {string} content - Content to write
+     * @returns {Promise<void>}
+     */
+    async writeFile(filePath, content) {
+      await fs.writeFile(filePath, content, 'utf8');
+    },
+
+    /**
+     * Change file permissions (Unix systems)
+     * @param {string} filePath - Path to file
+     * @param {number} mode - Permission mode (e.g., 0o755)
+     * @returns {Promise<void>}
+     */
+    async chmod(filePath, mode) {
+      try {
+        await fs.chmod(filePath, mode);
+      } catch (error) {
+        // On Windows or if chmod fails, this might not be critical for some use cases
+        // Let the calling code decide how to handle it
+        throw error;
+      }
+    },
   };
 
   // Verify that this implementation satisfies the interface
